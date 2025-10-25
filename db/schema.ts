@@ -1,6 +1,6 @@
 import { pgTable, text, integer, serial, boolean, timestamp } from "drizzle-orm/pg-core";
 
-export const blogsTable = pgTable("blogs", {
+export const postsTable = pgTable("posts", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   content: text("content").notNull(),
@@ -20,7 +20,7 @@ export const categoriesTable = pgTable("categories", {
 
 export const postCategoriesTable = pgTable("post_categories", {
   id: serial("id").primaryKey(),
-  blogId: integer("blog_id").notNull().references(() => blogsTable.id, { onDelete: "cascade" }),
+  postId: integer("post_id").notNull().references(() => postsTable.id, { onDelete: "cascade" }),
   categoryId: integer("category_id").notNull().references(() => categoriesTable.id, { onDelete: "cascade" }),
 });
  
