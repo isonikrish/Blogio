@@ -6,7 +6,7 @@ import {
   postCategoriesTable,
   categoriesTable,
 } from "../../db/schema";
-import { eq } from "drizzle-orm";
+import { eq, ilike, and, sql } from "drizzle-orm";
 const PostCreate = z.object({
   title: z.string().min(1),
   content: z.string().min(1),
@@ -94,4 +94,113 @@ export const postRouter = router({
     return { ...post, categories };
   }),
   
+  getByFilter: publicProcedure
+  .input(
+    z.object({
+      category: z.string().optional(),
+      query: z.string().optional(),
+    })
+  )
+  .query(async ({ ctx, input }) => {
+    const { category, query } = input;
+
+    // Case 1: Category and Query both provided
+    if (category && query) {
+      const posts = await ctx.db
+        .select({
+          id: postsTable.id,
+          title: postsTable.title,
+          slug: postsTable.slug,
+          imageUrl: postsTable.imageUrl,
+          published: postsTable.published,
+          createdAt: postsTable.createdAt,
+        })
+        .from(postsTable)
+        .innerJoin(
+          postCategoriesTable,
+          eq(postsTable.id, postCategoriesTable.postId)
+        )
+        .innerJoin(
+          categoriesTable,
+          eq(postCategoriesTable.categoryId, categoriesTable.id)
+        )
+        .where(
+          and(
+            ilike(categoriesTable.name, `%${category}%`),
+            ilike(postsTable.title, `%${query}%`),
+            eq(postsTable.published, true)
+          )
+        );
+
+      return posts;
+    }
+
+    // Case 2: Only category provided
+    if (category) {
+      const posts = await ctx.db
+        .select({
+          id: postsTable.id,
+          title: postsTable.title,
+          slug: postsTable.slug,
+          imageUrl: postsTable.imageUrl,
+          published: postsTable.published,
+          createdAt: postsTable.createdAt,
+        })
+        .from(postsTable)
+        .innerJoin(
+          postCategoriesTable,
+          eq(postsTable.id, postCategoriesTable.postId)
+        )
+        .innerJoin(
+          categoriesTable,
+          eq(postCategoriesTable.categoryId, categoriesTable.id)
+        )
+        .where(
+          and(
+            ilike(categoriesTable.name, `%${category}%`),
+            eq(postsTable.published, true)
+          )
+        );
+
+      return posts;
+    }
+
+    // Case 3: Only query provided
+    if (query) {
+      const posts = await ctx.db
+        .select({
+          id: postsTable.id,
+          title: postsTable.title,
+          slug: postsTable.slug,
+          imageUrl: postsTable.imageUrl,
+          published: postsTable.published,
+          createdAt: postsTable.createdAt,
+        })
+        .from(postsTable)
+        .where(
+          and(
+            ilike(postsTable.title, `%${query}%`),
+            eq(postsTable.published, true)
+          )
+        );
+
+      return posts;
+    }
+
+    // Case 4: No filters
+    const posts = await ctx.db
+      .select({
+        id: postsTable.id,
+        title: postsTable.title,
+        slug: postsTable.slug,
+        imageUrl: postsTable.imageUrl,
+        published: postsTable.published,
+        createdAt: postsTable.createdAt,
+      })
+      .from(postsTable)
+      .where(eq(postsTable.published, true));
+
+    return posts;
+  }),
+
 });
