@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Blogio – Modern Blogging Platform
 
-## Getting Started
+**Blogio** is a modern full-stack blogging platform built with **Next.js 15**, **tRPC**, **Drizzle ORM**, and **PostgreSQL**. It allows users to create, edit, and manage blog posts with category assignment, providing a clean and responsive experience.
 
-First, run the development server:
+---
 
+## ⚙️ Tech Stack
+
+| Layer | Technology |
+|-------|-------------|
+| Framework | Next.js 15 (App Router) |
+| API Layer | tRPC |
+| ORM | Drizzle ORM |
+| Database | PostgreSQL (Neon) |
+| Validation | Zod |
+| Data Fetching | React Query (via tRPC) |
+| Styling | Tailwind CSS + shadcn/ui |
+| Language | TypeScript |
+| Editor | Rich Text Editor |
+
+---
+
+## 🔧 Setup
+
+Follow these simple steps to run the project locally.
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/blogio.git
+cd blogio
+```
+### 2. Install Dependencies
+```bash
+npm install
+```
+### 3. Configure Environment Variables
+#### Create a .env file in the root directory and add:
+```bash
+
+DATABASE_URL="your_neon_database_url"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Run Database Migrations
+```bash
+npm drizzle-kit push
+```
+### 5. Start the Development Server
+```bash
+npm run dev
+```
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔧 Features Implemented
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔴 Core Features (Priority 1)
+- [x] Blog post CRUD (create, read, update, delete)
+- [x] Category CRUD
+- [x] Assign categories to posts
+- [x] Blog listing page
+- [x] Individual post view
+- [x] Category-based filtering
+- [x] Responsive navigation
+- [x] Clean, minimal UI
 
-## Learn More
+### 🟡 Expected Features (Priority 2)
+- [x] Landing page (Header, Hero, Features, Footer)
+- [x] Dashboard for post management
+- [x] Draft vs Published status
+- [x] Loading and error states
+- [x] Mobile-responsive design
+- [x] Rich Text editor
 
-To learn more about Next.js, take a look at the following resources:
+### 🟢 Bonus Features (Priority 3)
+- [ ] Dark mode
+- [x] Post statistics (reading time, word count)
+- [x] Search functionality
+- [ ] SEO meta tags
+- [ ] Pagination
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

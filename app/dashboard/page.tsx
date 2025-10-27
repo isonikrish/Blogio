@@ -48,103 +48,106 @@ export default function DashboardPage() {
   const publishedCount = posts.filter((p) => p.published).length
 
   return (
-    <div className="flex bg-background min-h-screen">
-      <DashboardSidebar />
+  <div className="flex flex-col md:flex-row bg-background min-h-screen">
+    <DashboardSidebar />
 
-      <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-            <div>
-              <h1 className="text-4xl font-bold text-foreground mb-2">Dashboard</h1>
-              <p className="text-muted-foreground">Manage your blog posts and content</p>
-            </div>
+    <main className="flex-1 w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-1 sm:mb-2">Dashboard</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">Manage your blog posts and content</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <Card className="p-6">
-              <p className="text-muted-foreground text-sm mb-2">Total Posts</p>
-              <p className="text-3xl font-bold text-foreground">{posts.length}</p>
-            </Card>
-            <Card className="p-6">
-              <p className="text-muted-foreground text-sm mb-2">Published</p>
-              <p className="text-3xl font-bold text-foreground">{publishedCount}</p>
-            </Card>
-          </div>
+        </div>
 
-          <Card>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Title</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Categories</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Status</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Date</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {posts.map((post) => (
-                    <tr key={post.id} className="border-b border-border hover:bg-secondary transition-colors">
-                      <td className="px-6 py-4 text-foreground font-medium">{post.title}</td>
-                      <td className="px-6 py-4">
-                        <div className="flex flex-wrap gap-2">
-                          {post.categories?.map((cat: string) => (
-                            <Badge key={cat} variant="secondary">
-                              {cat}
-                            </Badge>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <Badge variant={post.published ? "default" : "outline"}>
-                          {post.published ? "published" : "draft"}
-                        </Badge>
-                      </td>
-                      <td className="px-6 py-4 text-muted-foreground text-sm">
-                        {new Date(post.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center justify-start gap-2">
-                          <Button
-                            asChild
-                            size="sm"
-                            variant="outline"
-                            className="rounded-lg border border-border hover:bg-accent hover:text-accent-foreground transition-all duration-150">
-                            <Link href={`/blog/${post.slug}`}>View</Link>
-                          </Button>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+          <Card className="p-4 sm:p-6">
+            <p className="text-muted-foreground text-xs sm:text-sm mb-1 sm:mb-2">Total Posts</p>
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">{posts.length}</p>
+          </Card>
 
-                          <Button
-                            asChild
-                            size="sm"
-                            variant="secondary"
-                            className="rounded-lg hover:bg-primary/10 hover:text-primary transition-all duration-150 flex items-center gap-1">
-                            <Link href={`/blog/${post.slug}/edit`}>
-                              <Edit2 className="w-4 h-4" />
-                              Edit
-                            </Link>
-                          </Button>
-
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => handleDelete(post.id)}
-                            className="rounded-lg text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-150 flex items-center gap-1"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                            Delete
-                          </Button>
-                        </div>
-                      </td>
-
-
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          <Card className="p-4 sm:p-6">
+            <p className="text-muted-foreground text-xs sm:text-sm mb-1 sm:mb-2">Published</p>
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">{publishedCount}</p>
           </Card>
         </div>
-      </main>
-    </div>
-  )
+
+        <Card>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Title</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Categories</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Status</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Date</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {posts.map((post) => (
+                  <tr key={post.id} className="border-b border-border hover:bg-secondary transition-colors">
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-foreground font-medium text-sm sm:text-base">{post.title}</td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4">
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
+                        {post.categories?.map((cat: string) => (
+                          <Badge key={cat} variant="secondary" className="text-xs sm:text-sm">
+                            {cat}
+                          </Badge>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4">
+                      <Badge variant={post.published ? "default" : "outline"} className="text-xs sm:text-sm">
+                        {post.published ? "published" : "draft"}
+                      </Badge>
+                    </td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-muted-foreground text-xs sm:text-sm">
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4">
+                      <div className="flex flex-wrap items-center justify-start gap-1 sm:gap-2">
+                        <Button
+                          asChild
+                          size="sm"
+                          variant="outline"
+                          className="rounded-md border border-border hover:bg-accent hover:text-accent-foreground transition-all duration-150 text-xs sm:text-sm px-2 sm:px-3"
+                        >
+                          <Link href={`/blog/${post.slug}`}>View</Link>
+                        </Button>
+
+                        <Button
+                          asChild
+                          size="sm"
+                          variant="secondary"
+                          className="rounded-md hover:bg-primary/10 hover:text-primary transition-all duration-150 flex items-center gap-1 text-xs sm:text-sm px-2 sm:px-3"
+                        >
+                          <Link href={`/blog/${post.slug}/edit`}>
+                            <Edit2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                            Edit
+                          </Link>
+                        </Button>
+
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleDelete(post.id)}
+                          className="rounded-md text-destructive hover:bg-destructive/10 hover:text-destructive transition-all duration-150 flex items-center gap-1 text-xs sm:text-sm px-2 sm:px-3"
+                        >
+                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                          Delete
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </div>
+    </main>
+  </div>
+)
+
 }

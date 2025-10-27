@@ -16,7 +16,7 @@ export function Navbar() {
             <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-md transition-transform group-hover:scale-105">
               <span className="text-primary-foreground font-bold text-lg">B</span>
             </div>
-            <span className="font-semibold text-xl text-foreground tracking-tight">BlogHub</span>
+            <span className="font-semibold text-xl text-foreground tracking-tight">Blogio</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             {["Home", "Blogs", "Categories", "Dashboard"].map((item) => (
@@ -32,7 +32,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             
             <Button asChild className="rounded-lg shadow-sm font-medium">
-              <Link href="/create">Start Writing</Link>
+              <Link href="/create">New Post</Link>
             </Button>
           </div>
 

@@ -5,7 +5,6 @@ import { Edit3, Folder, Globe, PenTool, Star } from "lucide-react"
 export default function Home() {
   return (
     <div className="bg-background text-foreground">
-      {/* Hero */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -33,12 +32,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
-      <section className="py-24 border-t border-border/40">
+       <section className="py-24 border-t border-border/40">
         <div className="max-w-5xl mx-auto px-4 text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-semibold">Built for Writers, Loved by Readers</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            BlogHub gives you everything you need to publish beautiful posts, share your thoughts, and grow your personal brand — all without complexity.
+            Blogio gives you everything you need to publish beautiful posts, share your thoughts, and grow your personal brand — all without complexity.
           </p>
           <div className="flex justify-center gap-8 pt-6">
             <div className="text-center">
@@ -57,7 +55,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
       <section className="bg-muted/30 py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
