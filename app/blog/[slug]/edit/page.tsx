@@ -67,8 +67,13 @@ export default function EditBlog() {
     }, [post, categories]);
 
 
-    const handleChange = (field: string, value: any) =>
+    const handleChange = <K extends keyof typeof data>(
+        field: K,
+        value: typeof data[K]
+    ) => {
         setData((prev) => ({ ...prev, [field]: value }));
+    };
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

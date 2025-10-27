@@ -37,9 +37,13 @@ export default function CreatePostPage() {
     },
   })
 
-  const handleChange = (field: string, value: any) => {
-    setData((prev) => ({ ...prev, [field]: value }))
-  }
+  const handleChange = <K extends keyof typeof data>(
+    field: K,
+    value: typeof data[K]
+  ) => {
+    setData((prev) => ({ ...prev, [field]: value }));
+  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
