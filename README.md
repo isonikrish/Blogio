@@ -26,7 +26,7 @@ Follow these simple steps to run the project locally.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/isonikrish/blogio
+git clone https://github.com/isonikrish/blogio.git
 cd blogio
 ```
 ### 2. Install Dependencies
