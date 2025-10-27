@@ -32,7 +32,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             
             <Button asChild className="rounded-lg shadow-sm font-medium">
-              <Link href="/create">Write</Link>
+              <Link href="/create">Start Writing</Link>
             </Button>
           </div>
 

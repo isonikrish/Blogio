@@ -65,7 +65,7 @@ export default function BlogPostPage() {
         <article className="space-y-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Badge>{post.categories[0].categories.name}</Badge>
+              <Badge>{post.categories[0].name}</Badge>
               <span className="text-sm text-muted-foreground">
                 {new Date(post.createdAt!).toLocaleDateString()}
               </span>
